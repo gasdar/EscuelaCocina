@@ -1,0 +1,92 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.clases {
+    background-color: v.$gris;
+    padding: 5rem 0;
+
+    &__heading {
+        @include m.contenidoCentrado;
+    }
+    &__grid {
+        @include m.grid(1, 5rem);
+        align-items: start;
+
+        @include m.tablet {
+            grid-template-columns: repeat(6, 55rem);
+            overflow-y: hidden;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+        }
+        @include m.desktop {
+            overflow-x: unset;
+            @include m.grid(3, 2rem);
+        }
+    }
+}
+
+.notwebp.notavif .clases__heading {
+    @include m.heading('png');
+}
+.webp .clases__heading {
+    @include m.heading('webp');
+}
+.avif .clases__heading {
+    @include m.heading('avif');
+}
+
+.clase {
+    max-width: 55rem;
+    margin-inline: auto;
+    background-color: v.$blanco;
+    border: .1rem solid darken(v.$gris, 10%);
+
+    @include m.tablet {
+        scroll-snap-align: center;
+    }
+    &__imagen {
+        width: 100%;
+        height: auto;
+    }
+    &__meta {
+        background-color: v.$primario;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.4rem;
+    }
+    &__fecha {
+        margin: 0;
+        padding-left: 1rem;
+        color: v.$blanco;
+    }
+    &__precio {
+        margin: 0;
+        padding: 1rem;
+        background-color: v.$secundario;
+        font-weight: 700;
+    }
+    &__contenido {
+        padding: 2rem;
+    }
+    &__nombre {
+        text-transform: capitalize;
+        
+        @include m.desktop {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+        }
+    }
+    &__descripcion {
+        color: v.$primario;
+    }
+    &__enlace {
+        @include m.boton(v.$primario, v.$blanco);
+        display: block;
+        font-size: 1.6rem;
+        padding: 1rem;
+    }
+}
